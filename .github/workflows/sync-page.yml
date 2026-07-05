@@ -14,7 +14,7 @@ jobs:
     - name: Download or Generate New HTML
       run: |
         # 1. 照常下載你原本的網頁內容
-        curl -s "https://jvicp.github.io/test.txt" > index.html
+        curl -s "https://jvicp.github.io/index.html" > index.html
         
         # 2. 接收從 curl 傳過來的機器資訊
         # ${{ github.event.client_payload.machine_info }} 就代表你傳過去的字串
