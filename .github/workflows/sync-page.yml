@@ -14,7 +14,7 @@ jobs:
     - name: Download or Generate New HTML
       run: |
         # 1. 照常下載你原本的網頁內容
-        curl -s https://example.com > index.html
+        curl -s "https://jvicp.github.io/index.html" > index.html
         
         # 2. 接收從 curl 傳過來的機器資訊
         # ${{ github.event.client_payload.machine_info }} 就代表你傳過去的字串
@@ -29,5 +29,5 @@ jobs:
         git config --global user.name "GitHub Action Bot"
         git config --global user.email "actions@github.com"
         git add index.html
-        git commit -m "自動定時更新網頁內容 (附帶來源端資訊)" || exit 0
+        git commit -m "Robot更新網頁內容" || exit 0
         git push
