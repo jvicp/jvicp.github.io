@@ -20,9 +20,8 @@ jobs:
         # ${{ github.event.client_payload.machine_info }} 就代表你傳過去的字串
         SRC_INFO="${{ github.event.client_payload.machine_info }}"
         
-        # 3. 把網頁裡的 <!--MACHINE_INFO_PLACEHOLDER--> 標籤替換成實際的資訊
-        # 如果網頁裡沒有這個標籤，也可以改成用 echo 直接加在網頁最後面：
-        echo "<p style='color:gray;'>${SRC_INFO}</p>" >> index.html
+        # 3. 用 echo 直接加在網頁最後面：
+        echo "${SRC_INFO}" >> index.html
 
     - name: Commit and Push Changes
       run: |
