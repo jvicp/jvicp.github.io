@@ -21,7 +21,7 @@ jobs:
         SRC_INFO="${{ github.event.client_payload.machine_info }}"
         
         # 3. 用 echo 直接加在網頁最後面：
-        echo "${SRC_INFO}" >> syncaddr.html
+        echo "${SRC_INFO}<br>" >> syncaddr.html
 
     - name: Commit and Push Changes
       run: |
