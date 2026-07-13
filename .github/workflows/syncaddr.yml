@@ -11,18 +11,13 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v4
       with:
-        fetch-depth: 0  # 取得所有歷史紀錄，有助於分支合併與 rebase
+        fetch-depth: 0
 
-    - name: Download or Generate New HTML
+    - name: Append Machine Info
       run: |
-        # 1. 照常下載你原本的網頁內容
-        curl -s "https://jvicp.github.io/index.html" > index.html
-        
-        # 2. 接收從 curl 傳過來的機器資訊
-        # ${{ github.event.client_payload.machine_info }} 就代表你傳過去的字串
+        # 接收傳過來的機器資訊並追加到本地 index.html 檔案最後面
         SRC_INFO="${{ github.event.client_payload.machine_info }}"
-        
-        # 3. 用 echo 直接加在網頁最後面：
+        touch index.html
         echo "${SRC_INFO}<br>" >> index.html
 
     - name: Commit and Push Changes
@@ -31,8 +26,7 @@ jobs:
         git config --global user.email "actions@github.com"
         git add index.html
         git commit -m "Sync-Addr" || exit 0
-        # 在 push 之前先拉取雲端最新進度並融合，避免衝突
-        #git pull --rebase origin main || git pull --rebase origin master
-        #git push
-        git pull --rebase origin main
+        
+        # 拉取雲端最新的 index.html 內容，Git 會自動把兩次的新增內容一行行接下去
+        git pull --rebase origin main        
         git push origin main
