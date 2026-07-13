@@ -32,5 +32,7 @@ jobs:
         git add index.html
         git commit -m "Sync-Addr" || exit 0
         # 在 push 之前先拉取雲端最新進度並融合，避免衝突
-        git pull --rebase origin main || git pull --rebase origin master
-        git push
+        #git pull --rebase origin main || git pull --rebase origin master
+        #git push
+        git pull --rebase origin main
+        git push origin main
